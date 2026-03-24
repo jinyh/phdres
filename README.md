@@ -1,10 +1,12 @@
 # phdres — 博士研究想法孵化与评审工作台
 
-博士生研究想法的管理、评审与迭代平台。基于 Claude Code 构建，提供 AI/ML 领域研究想法的学术评审和方向检查工具。
+博士生研究想法的管理、评审与迭代平台，提供 AI/ML 领域研究想法的学术评审和方向检查工具。
 
-## 功能
+同一套 skill 分别适配 **Claude Code**（`.claude/`）和 **Codex**（`.agents/`），两者共享相同的评审逻辑与参考资料。
 
-### idea-review Skill
+## Skills
+
+### idea-review
 
 支持两种模式：
 
@@ -27,11 +29,17 @@
 
 ```
 phdres/
-├── CLAUDE.md              # 项目指令（Claude Code）
-├── AGENT.md               # 项目指令（Codex，symlink → CLAUDE.md）
-└── .claude/
+├── CLAUDE.md                          # 项目指令（Claude Code）
+├── AGENT.md                           # 项目指令（Codex，symlink → CLAUDE.md）
+├── .claude/
+│   └── skills/
+│       └── idea-review/               # Claude Code 版 skill
+│           ├── SKILL.md
+│           └── references/
+│               └── review-prompt.md
+└── .agents/
     └── skills/
-        └── idea-review/
+        └── idea-review/               # Codex 版 skill
             ├── SKILL.md
             └── references/
                 └── review-prompt.md
@@ -39,7 +47,7 @@ phdres/
 
 ## 使用方式
 
-需要 [Claude Code](https://github.com/anthropics/claude-code)。
+**Claude Code**：在项目目录下启动 Claude Code，直接用自然语言触发。
 
 ```bash
 # 方向检查
@@ -48,6 +56,8 @@ phdres/
 # 完整评审（提供 idea 草稿）
 "帮我评审一下这个研究想法：[粘贴内容]"
 ```
+
+**Codex**：在项目目录下使用 Codex，skill 自动从 `.agents/skills/` 加载。
 
 ## 适用领域
 
